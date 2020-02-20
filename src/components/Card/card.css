@@ -1,0 +1,42 @@
+.paper {
+  background: #fff;
+  flex: 1;
+  overflow: hidden;
+  box-shadow: rgba(0, 0, 0, .25) 0 3px 11px 0;
+}
+
+.card {
+  display: flex;
+  flex: 1 1 100%;
+  padding: 10px;
+}
+
+@media (min-width: 768px) {
+  .card {
+    flex: 1 1 calc(100% / 2);
+  }
+}
+
+@media (min-width: 1024px) {
+  .card {
+    flex: 1 1 calc(100% / 3);
+  }
+}
+
+.cardContent {
+  padding: 20px;
+}
+
+.cardMedia {
+  display: block;
+  transform: scale(1);
+  backface-visibility: hidden;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 200ms ease-out;
+}
+
+.card:hover .cardMedia {
+  transform: scale(1.05);
+}
+

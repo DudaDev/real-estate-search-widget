@@ -1,0 +1,23 @@
+.summaryMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.summaryPrice {
+  flex: 1;
+}
+.summaryProps {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 5px;
+  font-size: .7rem;
+}
+
+.summaryAddress {
+  font-size: .7rem;
+  opacity: .7;
+  text-align: left;
+}

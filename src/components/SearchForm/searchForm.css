@@ -1,0 +1,77 @@
+.searchForm {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 15px;
+}
+
+.formRow {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.formInput {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 50%;
+  padding: 0 5px;
+  margin: 10px auto;
+}
+
+@media (min-width: 768px) {
+  .formInput {
+    flex: 1 1 25%;
+  }
+}
+
+.formInput label {
+  font-size: 14px;
+  color: rgb(51, 51, 51);
+  padding-bottom: 3px;
+}
+
+.formInput input {
+  background :#fff;
+  border: 1px solid rgb(212, 212, 212);
+  color: rgb(51, 51, 51);
+  font-size: 16px;
+  height: 40px;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.buttonRow {
+  margin-top: 15px;
+}
+
+.mls-searchButton {
+  appearance: none;
+  background: rgba(91, 189, 200);
+  border: none;
+  color: rgba(255, 255, 255);
+  cursor: pointer;
+  display: block;
+  font-size: 15px;
+  height: 40px;
+  margin: auto;
+  padding: 10px;
+  text-transform: uppercase;
+  transition: 200ms opacity ease-out;
+}
+
+.formButton:hover {
+  opacity: 0.7;
+}
+
+@media (min-width: 768px) {
+  .formButton {
+    width: 250px;
+  }
+}
+
+.helperText {
+  color: #990000;
+  font-size: .7rem;
+  margin-top: 3px;
+  opacity: 0.8;
+}

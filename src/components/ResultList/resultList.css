@@ -1,0 +1,13 @@
+.results {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  align-items: stretch;
+  margin: 0;
+  padding: 10px;
+}
+
+.results:after {
+  content: '';
+  flex: 999 1 auto;
+}
