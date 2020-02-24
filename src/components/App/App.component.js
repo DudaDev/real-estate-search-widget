@@ -1,20 +1,27 @@
 import React from 'react';
 
 import PropertyProvider from '../../providers/Property';
-import DudaProvider from '../../providers/Duda';
+import DudaProvider, { useDuda } from '../../providers/Duda';
 import Search from '../SearchForm';
 import Properties from '../Properties';
 
 import './app.css';
 
+function SearchUI () {
+  const { searchButtonText = "SEARCH!!" , limit = 100 } = useDuda();
+
+  return (
+    <PropertyProvider limit={limit}>
+      <Search searchButtonText={searchButtonText} />
+      <Properties limit={limit}/>
+    </PropertyProvider>
+  )
+}
 function App({ dudaConfig = {} }) {
   return (
     <DudaProvider config={dudaConfig}>
       <div className="app">
-        <PropertyProvider>
-          <Search />
-          <Properties />
-        </PropertyProvider>
+        <SearchUI />
       </div>
     </DudaProvider>
   );

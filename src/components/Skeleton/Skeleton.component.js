@@ -4,8 +4,8 @@ import Card from '../Card';
 
 import './skeleton.css';
 
-export default function Skeleton ({ items = 9 }) {
-  const empty = new Array(items).fill({});
+export default function Skeleton ({ limit }) {
+  const empty = new Array(limit).fill({});
 
   return (
     <ResultList>

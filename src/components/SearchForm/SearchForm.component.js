@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import useForm from '../../hooks/useForm';
-import { useDuda } from '../../providers/Duda';
 import { fetchProperties, useProperty } from '../../providers/Property'
 import './searchForm.css';
 
@@ -68,8 +67,7 @@ function FormHelperText ({ children }) {
   return <div className="helperText">{children}</div>
 }
 
-function SearchForm ({ onSubmit }) {
-  const { searchButtonText = "SEARCH" } = useDuda();
+function SearchForm ({ onSubmit, searchButtonText }) {
   const [handleChange, handleSubmit, errors, values] = useForm(
     defaults,
     validators,
@@ -119,7 +117,7 @@ function SearchForm ({ onSubmit }) {
   )
 }
 
-export default function Search () {
+export default function Search ({ searchButtonText }) {
   const { dispatch } = useProperty();
 
   function handleSearch (vals) {
@@ -132,6 +130,6 @@ export default function Search () {
   }
 
   return (
-    <SearchForm onSubmit={handleSearch} />
+    <SearchForm onSubmit={handleSearch} searchButtonText={searchButtonText} />
   )
 }

@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useReducer }  from 'react';
-import { useDuda } from '../Duda';
 
 const REQUIRED_PARAMS = {
-  limit: 12,
   p: 'json',
   t: 'spark-list'
 }
@@ -80,8 +78,7 @@ export function fetchProperties (params, dispatch) {
     });;
 }
 
-export default function PropertyProvider ({ children }) {
-  const { limit } = useDuda();
+export default function PropertyProvider ({ children, limit }) {
   const [state, dispatch] = useReducer(propertyReducer, {
     data: [],
     error: null,
