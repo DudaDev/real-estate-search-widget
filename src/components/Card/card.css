@@ -28,6 +28,7 @@
 }
 
 .cardMedia {
+  background: #ededed;
   display: block;
   transform: scale(1);
   backface-visibility: hidden;

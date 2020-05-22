@@ -7,7 +7,7 @@ import './results.css';
 function NotFound () {
   return (
     <section className="notFound">
-      <h4>Sorry, we couldn't find any properties for your search.</h4>
+      <div className="notFoundTitle">Sorry, we couldn't find any properties for your search.</div>
       <p>Try changing some filters and searching again.</p>
     </section>
   )

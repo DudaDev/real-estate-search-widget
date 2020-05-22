@@ -4,4 +4,11 @@
   text-align: center;
 }
 
+.notFoundTitle {
+  color: #696969;
+  font-weight: 600;
+  font-family: Roboto, sans-serif;
+  font-size: 18px;
+}
+
 

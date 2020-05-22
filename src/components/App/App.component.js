@@ -8,7 +8,7 @@ import Properties from '../Properties';
 import './app.css';
 
 function SearchUI () {
-  const { searchButtonText = "SEARCH!!" , limit = 100 } = useDuda();
+  const { searchButtonText = "SEARCH" , limit = 12 } = useDuda();
 
   return (
     <PropertyProvider limit={limit}>

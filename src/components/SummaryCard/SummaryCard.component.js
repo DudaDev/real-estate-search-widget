@@ -2,8 +2,9 @@ import React from 'react';
 import Card, { CardMedia, CardContent } from '../Card';
 
 import './summaryCard.css';
+const noop = () => {};
 
-export default function SummaryCard ({ property }) {
+export default function SummaryCard ({ property, onImageError = noop }) {
   const { page_item_url, data } = property;
   const {
     PrimaryPhoto: photo,
@@ -14,6 +15,10 @@ export default function SummaryCard ({ property }) {
     BedsTotal: beds
   } = data;
 
+  function handleImageError () {
+    onImageError(page_item_url);
+  }
+
   const filteredBeds = String(beds).replace(/^[*]+/, '');
   const filteredBaths = String(baths).replace(/^[*]+/, '');
 
@@ -22,6 +27,7 @@ export default function SummaryCard ({ property }) {
         <a href={`/listing/${page_item_url}`}>
           <CardMedia
             image={photo}
+            onImageError={handleImageError}
             />
         </a>
         <CardContent>

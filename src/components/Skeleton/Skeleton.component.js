@@ -5,7 +5,7 @@ import Card from '../Card';
 import './skeleton.css';
 
 export default function Skeleton ({ limit }) {
-  const empty = new Array(limit).fill({});
+  const empty = new Array(parseInt(limit, 10)).fill({});
 
   return (
     <ResultList>
