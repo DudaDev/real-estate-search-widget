@@ -1,5 +1,6 @@
 export {
   default,
   useProperty,
-  fetchProperties
+  fetchProperties,
+  getPropertiesById,
 } from './Property.provider';

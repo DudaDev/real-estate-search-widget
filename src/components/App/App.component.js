@@ -7,13 +7,23 @@ import Properties from '../Properties';
 
 import './app.css';
 
-function SearchUI () {
-  const { searchButtonText = "SEARCH" , limit = 12 } = useDuda();
+function Layout ({ properties, searchButtonText, limit }) {
+  const l = (properties) ? properties.length : limit;
 
   return (
-    <PropertyProvider limit={limit}>
-      <Search searchButtonText={searchButtonText} />
-      <Properties limit={limit}/>
+    <>
+      { !properties && <Search searchButtonText={searchButtonText} /> }
+      <Properties limit={l} />
+    </>
+  )
+}
+
+function SearchUI () {
+  const { searchButtonText = "SEARCH" , limit = 12, properties = undefined, mls = undefined } = useDuda();
+
+  return (
+    <PropertyProvider limit={limit} properties={properties} mls={mls}>
+      <Layout searchButtonText={searchButtonText} limit={limit} properties={properties} />
     </PropertyProvider>
   )
 }

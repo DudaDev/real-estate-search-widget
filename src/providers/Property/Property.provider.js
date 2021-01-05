@@ -1,10 +1,5 @@
 import React, { useContext, useEffect, useReducer }  from 'react';
 
-const REQUIRED_PARAMS = {
-  p: 'json',
-  t: 'spark-list'
-}
-
 const PropertyStateContext = React.createContext();
 const PropertyDispatchContext = React.createContext();
 
@@ -49,7 +44,9 @@ function propertyReducer (state, action) {
       return {
         data: propertyDataReducer(state.data, action),
         error: propertyErrorReducer(action),
-        loading: propertyLoadingReducer(action)
+        loading: propertyLoadingReducer(action),
+        limit: state.limit,
+        mls: state.mls
       }
     default:
       throw Error('Unknown action type for property reducer');
@@ -63,32 +60,45 @@ function getQuery (params) {
     return acc;
   }, {});
 
-  const combined = { ...REQUIRED_PARAMS, ...cleaned };
-  return Object.entries(combined).map(prop => prop.join('=')).join('&');
+  return Object.entries(cleaned).map(prop => prop.join('=')).join('&');
 }
 
-export function fetchProperties (params, dispatch) {
-  const query = getQuery(params);
+function makeRequest (query, dispatch) {
   return fetch(`${process.env.REACT_APP_SEARCH_BASE_URL}?${query}`)
     .then(response => response.json())
     .then(results => {
       dispatch({ type: PROPERTY.FETCH_PROPERTIES_SUCCESS, properties: results });
     }).catch((error) => {
       dispatch({ type: PROPERTY.FETCH_PROPERTIES_FAILURE, error });
-    });;
+    });
 }
 
-export default function PropertyProvider ({ children, limit }) {
+export function fetchProperties (params, dispatch) {
+  const query = getQuery(params);
+  return makeRequest(query, dispatch);
+}
+
+export function getPropertiesById(properties, mls, dispatch) {
+  const ids = properties.map(p => p.mlsNumber).join(',');
+  const query = `mls=${mls}&mlsNumber=${ids}`;
+  return makeRequest(query, dispatch);
+}
+
+export default function PropertyProvider ({ children, limit, properties, mls }) {
   const [state, dispatch] = useReducer(propertyReducer, {
     data: [],
     error: null,
     loading: false,
-    pristine: true
+    pristine: true,
+    limit,
+    mls
   });
 
   useEffect(() => {
-    fetchProperties({ limit }, dispatch);
-  }, [limit])
+    (properties)
+      ? getPropertiesById(properties, mls, dispatch)
+      : fetchProperties({ limit, mls }, dispatch);
+  }, [limit, properties, mls])
 
   return (
     <PropertyStateContext.Provider value={state}>

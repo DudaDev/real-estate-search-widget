@@ -6,34 +6,32 @@ const noop = () => {};
 
 export default function SummaryCard ({ property, onImageError = noop }) {
   const { page_item_url, data } = property;
+
   const {
-    PrimaryPhoto: photo,
-    ListingAddress: address,
-    ListPrice_Formatted: price,
-    BuildingAreaTotal_Formatted: area,
-    BathsTotal: baths,
-    BedsTotal: beds
+    primaryImage,
+    listPrice,
+    buildingArea,
+    address,
+    baths,
+    beds
   } = data;
 
   function handleImageError () {
     onImageError(page_item_url);
   }
 
-  const filteredBeds = String(beds).replace(/^[*]+/, '');
-  const filteredBaths = String(baths).replace(/^[*]+/, '');
-
   return (
       <Card>
-        <a href={`/listing/${page_item_url}`}>
+        <a href={`/listings/${page_item_url}`}>
           <CardMedia
-            image={photo}
+            image={primaryImage}
             onImageError={handleImageError}
             />
         </a>
         <CardContent>
           <div className="summaryMeta">
-            <div className="summaryPrice">{ price }</div>
-            <div className="summaryProps">{ filteredBeds || '-' } bd | { filteredBaths || '-' } ba | { area || '--' } sqft</div>
+            <div className="summaryPrice">{ listPrice }</div>
+            <div className="summaryProps">{ beds || '-' } bd | { baths || '-' } ba | { buildingArea || '' }</div>
           </div>
           <div className="summaryAddress">{ address }</div>
         </CardContent>

@@ -118,7 +118,7 @@ function SearchForm ({ onSubmit, searchButtonText }) {
 }
 
 export default function Search ({ searchButtonText }) {
-  const { dispatch } = useProperty();
+  const { mls, limit, dispatch } = useProperty();
 
   function handleSearch (vals) {
     const cleaned = Object.keys(vals).reduce((acc, key) => {
@@ -126,7 +126,7 @@ export default function Search ({ searchButtonText }) {
       return acc;
     }, {});
 
-    fetchProperties(cleaned, dispatch);
+    fetchProperties({ ...cleaned, mls, limit }, dispatch);
   }
 
   return (
