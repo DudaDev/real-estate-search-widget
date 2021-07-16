@@ -64,6 +64,8 @@ function getQuery (params) {
 }
 
 function makeRequest (query, dispatch) {
+  dispatch({ type: PROPERTY.FETCH_PROPERTIES_REQUEST });
+
   return fetch(`${process.env.REACT_APP_SEARCH_BASE_URL}?${query}`)
     .then(response => response.json())
     .then(results => {
@@ -84,21 +86,21 @@ export function getPropertiesById(properties, mls, dispatch) {
   return makeRequest(query, dispatch);
 }
 
-export default function PropertyProvider ({ children, limit, properties, mls }) {
+export default function PropertyProvider ({ children, pageLength, properties, mls }) {
   const [state, dispatch] = useReducer(propertyReducer, {
     data: [],
     error: null,
     loading: false,
     pristine: true,
-    limit,
+    pageLength,
     mls
   });
 
   useEffect(() => {
     (properties)
       ? getPropertiesById(properties, mls, dispatch)
-      : fetchProperties({ limit, mls }, dispatch);
-  }, [limit, properties, mls])
+      : fetchProperties({ pageLength, mls }, dispatch);
+  }, [pageLength, properties, mls])
 
   return (
     <PropertyStateContext.Provider value={state}>

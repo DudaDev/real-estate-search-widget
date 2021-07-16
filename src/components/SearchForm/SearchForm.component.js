@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import useForm from '../../hooks/useForm';
-import { fetchProperties, useProperty } from '../../providers/Property'
 import './searchForm.css';
 
 
@@ -67,11 +66,11 @@ function FormHelperText ({ children }) {
   return <div className="helperText">{children}</div>
 }
 
-function SearchForm ({ onSubmit, searchButtonText }) {
+export default function Search ({ onSearch, searchButtonText }) {
   const [handleChange, handleSubmit, errors, values] = useForm(
     defaults,
     validators,
-    onSubmit
+    onSearch
   );
 
   function formatMonetaryValue (e) {
@@ -114,22 +113,5 @@ function SearchForm ({ onSubmit, searchButtonText }) {
         <button type="submit" className="mls-searchButton">{ searchButtonText }</button>
       </div>
     </form>
-  )
-}
-
-export default function Search ({ searchButtonText }) {
-  const { mls, limit, dispatch } = useProperty();
-
-  function handleSearch (vals) {
-    const cleaned = Object.keys(vals).reduce((acc, key) => {
-      acc[key] = vals[key].replace(/[^\d]/g, '');
-      return acc;
-    }, {});
-
-    fetchProperties({ ...cleaned, mls, limit }, dispatch);
-  }
-
-  return (
-    <SearchForm onSubmit={handleSearch} searchButtonText={searchButtonText} />
   )
 }

@@ -19,8 +19,8 @@ if (process.env.NODE_ENV === "development") {
     containerId: 'root',
     props: {
       dudaConfig: {
-        'mls': 'actris'
         /*
+        'mls': 'actris'
         'properties': [
           { mlsNumber: 2406916 },
           { mlsNumber: 1576428 },

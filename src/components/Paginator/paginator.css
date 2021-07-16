@@ -1,0 +1,19 @@
+.pageList {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+.pageButton {
+  padding: 5px;
+  margin: 5px;
+  flex: 0 1 20px;
+  appearance: none;
+  border: none;
+  background: rgba(91, 189, 200);
+  color: #fff;
+  cursor: pointer;
+}
+
+.pageButton.active {
+  background: rgb(42, 105, 112); 
+}
