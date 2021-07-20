@@ -24,7 +24,7 @@ export default function SummaryCard ({ property, onImageError = noop }) {
       <Card>
         <a href={`/listings/${page_item_url}`}>
           <CardMedia
-            image={primaryImage}
+            image={primaryImage.replace("duda1.managebuilding.com","d39aa1l6bu2o7g.cloudfront.net")}
             onImageError={handleImageError}
             />
         </a>
